@@ -10,13 +10,14 @@ function sshlist() {
 
 # export ssh public key to a remote server
 function sshkey() {
-  KEY="~/.ssh/id_dsa.pub"
+  KEY="$HOME/.ssh/id_dsa.pub"
 
-  if [ ! -f ~/.ssh/id_dsa.pub ];then
-      echo "private key not found at $KEY"
-      echo "* please create it with "ssh-keygen -t dsa" *"
-      echo "* to login to the remote host without a password, don't give the key you create with ssh-keygen a password! *"
-      return
+  if [ ! -f ${KEY} ];then
+    KEY="$HOME/.ssh/id_rsa.pub"    
+    echo "private key not found at ${KEY}"
+    echo "* please create it with "ssh-keygen -t dsa" *"
+    echo "* to login to the remote host without a password, don't give the key you create with ssh-keygen a password! *"
+    return
   fi
 
   if [ -z $1 ];then
